@@ -2,7 +2,7 @@ name: Build Mac App
 
 on: 
   push:
-    branches: [ "main" ] # Runs when you push to the main branch
+    branches: [ "main" ]
 
 jobs:
   build-mac:
@@ -10,10 +10,10 @@ jobs:
     
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -24,11 +24,12 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          # CHANGE main.py BELOW TO MATCH YOUR FILENAME EXACTLY
+          # Double check: Is your file actually named main.py? 
+          # If not, change main.py below to match your filename!
           pyinstaller --noconsole --onefile main.py
 
       - name: Upload Mac App Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MacOS-App
           path: dist/
